@@ -1,0 +1,56 @@
+﻿@* Delete role confirmation dialog – initially shows a loading spinner, then role details *@
+<div id="deleteRoleContent">
+    <div class="text-center py-5" id="deleteRoleLoading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">در حال بارگذاری...</span>
+        </div>
+        <p class="mt-2 text-secondary">در حال دریافت اطلاعات نقش...</p>
+    </div>
+
+    <div id="deleteRoleConfirmation" style="display:none;">
+        <div class="glass-card mb-3">
+            <h5 class="mb-2"><i class="fas fa-info-circle"></i> اطلاعات نقش</h5>
+            <table class="glass-table" style="width:auto;">
+                <tr>
+                    <td><strong>نام نقش:</strong></td>
+                    <td><span id="deleteRoleName">...</span></td>
+                </tr>
+                <tr>
+                    <td><strong>تعداد کاربران با این نقش:</strong></td>
+                    <td><span id="deleteRoleUserCount">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="glass-card mb-3">
+            <div class="permission-group-title">
+                <i class="fas fa-cogs"></i> مجوزهای مدیریتی
+            </div>
+            <div id="deleteGeneralPermissions" class="d-flex flex-wrap gap-2"></div>
+            <div id="deleteGeneralEmpty" class="text-secondary" style="display:none;">این نقش مجوز مدیریتی ندارد.</div>
+        </div>
+
+        <div class="glass-card mb-3">
+            <div class="permission-group-title">
+                <i class="fas fa-bell"></i> مجوزهای نوتیفیکیشن
+            </div>
+            <div id="deleteNotificationPermissions" class="d-flex flex-wrap gap-2"></div>
+            <div id="deleteNotificationEmpty" class="text-secondary" style="display:none;">این نقش مجوز نوتیفیکیشن ندارد.</div>
+        </div>
+
+        <div class="glass-card p-4 text-center">
+            <div class="mb-3" style="font-size:2.5rem; color:#ef4444;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h4 class="mb-3">آیا از حذف این نقش مطمئن هستید؟</h4>
+            <p class="text-secondary">این عملیات غیرقابل بازگشت است و تمام کاربران دارای این نقش، آن را از دست خواهند داد.</p>
+            <div class="d-flex gap-2 justify-content-center mt-4">
+                <button id="confirmDeleteRoleBtn" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> بله، حذف کن
+                </button>
+                <a href="/Admin/Roles" class="btn btn-outline-light">انصراف</a>
+            </div>
+            <input type="hidden" id="deleteRoleId" value="">
+        </div>
+    </div>
+</div>

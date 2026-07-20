@@ -1,0 +1,29 @@
+﻿@* 401 Unauthorized *@
+@{
+    ViewData["Title"] = "احراز هویت الزامی است";
+}
+<div class="error-glass-wrapper">
+    <div class="error-glass-card" style="--er-primary: #a78bfa; --er-gradient: linear-gradient(135deg, #a78bfa, #f472b6);">
+        <div class="error-illustration">
+            <div class="circle-bg"></div>
+            <div class="error-icon-svg">🔐</div>
+            <div class="particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+        </div>
+        <div class="error-code">۴۰۱</div>
+        <h2 class="error-title">هویتت رو ثابت کن!</h2>
+        <p class="error-description">
+            انگار فراموش کردی کارت شناساییت رو نشون بدی! برای دیدن این صفحه باید وارد حساب کاربری‌ات بشی.
+            نگران نباش، فرم ورود همین نزدیکی‌هاست. 😉
+        </p>
+        <div class="error-actions">
+            <a href="/login" class="error-btn error-btn-primary"><i class="fas fa-sign-in-alt"></i> ورود به حساب</a>
+            <a href="/SignUp" class="error-btn error-btn-outline"><i class="fas fa-user-plus"></i> ثبت‌نام</a>
+        </div>
+    </div>
+</div>

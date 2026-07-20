@@ -1,0 +1,73 @@
+﻿@model SupportPulse.Core.ViewModels.User.LoginUserVM
+@{
+    ViewData["Title"] = "ورود به حساب";
+}
+<main class="main-content">
+    <div class="container">
+        <div class="row pt-4 pt-lg-5 justify-content-center">
+            <div class="col-md-8 col-lg-5">
+                <div class="register-card">
+                    <div class="card-header text-center">
+                        <h2 class="card-title">ورود به حساب</h2>
+                        <p class="card-subtitle">برای ادامه وارد شوید</p>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Login" asp-controller="Identity" method="post">
+                            <div class="input-wrapper">
+                                <input asp-for="UserName" class="form-input" placeholder=" ">
+                                <label asp-for="UserName"></label>
+                                <span asp-validation-for="UserName"></span>
+                                <i class="fas fa-user input-icon"></i>
+                            </div>
+                            <div class="input-wrapper">
+                                <input asp-for="Password" class="form-input" placeholder=" ">
+                                <label asp-for="Password"></label>
+                                <span asp-validation-for="Password"></span>
+                                <i class="fas fa-lock input-icon"></i>
+                                <button type="button" class="password-toggle" tabindex="-1"><i class="far fa-eye"></i></button>
+                            </div>
+                            <div class="terms-wrapper">
+                                <label class="custom-checkbox">
+                                    <input asp-for="RememberMe" id="rememberMe">
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-label">مرا به خاطر بسپار</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <span>ورود</span>
+                                <i class="fas fa-sign-in-alt"></i>
+                            </button>
+                            <div class="login-link mt-3 d-flex justify-content-between">
+                                <a asp-action="SignUp" asp-controller="Identity">ثبت‌نام نکرده‌اید؟</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="js/Identity/identity.js"></script>
+    <partial name="Partials/Validation/_ValidationScriptsPartial" />
+    <partial name="Partials/Alert/_AlertPartial" model="Model" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.querySelector('.password-toggle');
+        const passwordInput = document.getElementById('Password');
+        if (!toggleBtn || !passwordInput) return;
+        let isPasswordVisible = false;
+        toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        isPasswordVisible = !isPasswordVisible;
+        passwordInput.type = isPasswordVisible ? 'text' : 'password';      
+        const svg = this.querySelector('svg');
+        if (svg) {
+        svg.classList.remove('fa-eye', 'fa-eye-slash');
+        svg.classList.add(isPasswordVisible ? 'fa-eye-slash' : 'fa-eye');
+        }
+        });
+        });
+    </script>
+}

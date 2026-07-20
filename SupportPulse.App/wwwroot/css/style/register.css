@@ -1,0 +1,142 @@
+﻿/* Submit button – reserved for potential loading state */
+.btn-submit {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    .btn-submit.loading {
+        pointer-events: none;
+    }
+
+/* ========================================================================
+   Full‑screen glass overlay (highly transparent)
+   ======================================================================== */
+.register-glass-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.2);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+    .register-glass-overlay.active {
+        display: flex;
+        opacity: 1;
+    }
+
+/* Centred glass card (highly transparent) */
+.glass-loader-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    max-width: 400px;
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+/* ========================================================================
+   Three glowing bouncing circles
+   ======================================================================== */
+.glow-circles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 2rem;
+}
+
+.glow-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    animation: glowBounce 1.4s ease-in-out infinite;
+}
+
+    .glow-circle:nth-child(1) {
+        background: #818cf8;
+        box-shadow: 0 0 18px 4px #818cf8;
+        animation-delay: 0s;
+    }
+
+    .glow-circle:nth-child(2) {
+        background: #10b981;
+        box-shadow: 0 0 18px 4px #10b981;
+        animation-delay: 0.25s;
+    }
+
+    .glow-circle:nth-child(3) {
+        background: #f59e0b;
+        box-shadow: 0 0 18px 4px #f59e0b;
+        animation-delay: 0.5s;
+    }
+
+@keyframes glowBounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    30% {
+        transform: translateY(-18px) scale(1.2);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateY(0) scale(0.9);
+        opacity: 0.9;
+    }
+}
+
+/* ========================================================================
+   Text inside the loader card
+   ======================================================================== */
+.glass-loader-card .loader-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.glass-loader-card .loader-subtitle {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================================================
+   Light theme overrides
+   ======================================================================== */
+[data-theme="light"] .register-glass-overlay {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="light"] .glass-loader-card {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+    [data-theme="light"] .glass-loader-card .loader-title {
+        color: var(--text-primary);
+    }
+
+    [data-theme="light"] .glass-loader-card .loader-subtitle {
+        color: var(--text-secondary);
+    }

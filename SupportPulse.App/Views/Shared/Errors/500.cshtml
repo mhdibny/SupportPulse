@@ -1,0 +1,29 @@
+﻿@* 500 Internal Server Error *@
+@{
+    ViewData["Title"] = "خطای سرور";
+}
+<div class="error-glass-wrapper">
+    <div class="error-glass-card" style="--er-primary: #f59e0b; --er-gradient: linear-gradient(135deg, #f59e0b, #ef4444);">
+        <div class="error-illustration">
+            <div class="circle-bg"></div>
+            <div class="error-icon-svg">🛠️</div>
+            <div class="particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+        </div>
+        <div class="error-code">۵۰۰</div>
+        <h2 class="error-title">یه جای کار میلنگه!</h2>
+        <p class="error-description">
+            متأسفانه یک خطای غیرمنتظره رخ داد. تیم فنی ما در حال بررسی و رفع مشکل است.
+            لطفاً چند لحظه دیگر دوباره تلاش کنید. اگر مشکل ادامه داشت، با پشتیبانی تماس بگیرید.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="error-btn error-btn-primary"><i class="fas fa-home"></i> بازگشت به خانه</a>
+            <button onclick="location.reload()" class="error-btn error-btn-outline"><i class="fas fa-redo-alt"></i> تلاش دوباره</button>
+        </div>
+    </div>
+</div>

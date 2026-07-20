@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".env.example" />
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="SupportPulse.App/SupportPulse.App.csproj" />
+  <Project Path="SupportPulse.Core/SupportPulse.Core.csproj" Id="f22b413c-01ce-4128-93b9-394ed7172a3f" />
+  <Project Path="SupportPulse.Data/SupportPulse.Data.csproj" Id="afeb9ae8-55f3-4001-b847-1824580b5cf4" />
+</Solution>

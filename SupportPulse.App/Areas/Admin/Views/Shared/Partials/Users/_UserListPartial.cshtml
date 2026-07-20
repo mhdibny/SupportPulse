@@ -1,0 +1,57 @@
+﻿@* User list partial with advanced search panel, sortable glass table, and pagination placeholder *@
+<div class="glass-card animate-fade-in-up">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h4 class="mb-0">لیست کاربران</h4>
+    </div>
+
+    <div class="user-search-panel glass-card p-3 mb-3">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-3 col-sm-6">
+                <label class="form-label small mb-1">نام کاربری</label>
+                <input type="text" id="userSearchUsername" class="form-control form-control-sm" placeholder="جستجو...">
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <label class="form-label small mb-1">نام</label>
+                <input type="text" id="userSearchFirstName" class="form-control form-control-sm" placeholder="جستجو...">
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <label class="form-label small mb-1">نام خانوادگی</label>
+                <input type="text" id="userSearchLastName" class="form-control form-control-sm" placeholder="جستجو...">
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <label class="form-label small mb-1">وضعیت</label>
+                <select id="userBanFilter" class="form-select form-select-sm">
+                    <option value="">همه</option>
+                    <option value="false">فعال</option>
+                    <option value="true">بن شده</option>
+                </select>
+            </div>
+            <div class="col-md-1 col-sm-12 d-flex align-items-end">
+                <button id="clearUserSearchBtn" class="btn btn-outline-light btn-sm w-100" title="پاک کردن فیلترها">
+                    <i class="fas fa-undo-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="glass-table">
+            <thead>
+                <tr>
+                    <th style="cursor:pointer;" data-sort="Id"># <i class="fas fa-sort text-secondary ms-1"></i></th>
+                    <th style="cursor:pointer;" data-sort="UserName">نام کاربری <i class="fas fa-sort text-secondary ms-1"></i></th>
+                    <th style="cursor:pointer;" data-sort="FirstName">نام <i class="fas fa-sort text-secondary ms-1"></i></th>
+                    <th style="cursor:pointer;" data-sort="LastName">نام خانوادگی <i class="fas fa-sort text-secondary ms-1"></i></th>
+                    <th>وضعیت</th>
+                    <th>نقش‌ها</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <tr><td colspan="7" class="text-center">در حال بارگذاری...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="usersPagination" class="d-flex justify-content-center align-items-center mt-3 gap-2"></div>
+</div>

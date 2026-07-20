@@ -1,0 +1,29 @@
+﻿@* 503 Service Unavailable *@
+@{
+    ViewData["Title"] = "سرویس در دسترس نیست";
+}
+<div class="error-glass-wrapper">
+    <div class="error-glass-card" style="--er-primary: #38bdf8; --er-gradient: linear-gradient(135deg, #38bdf8, #2dd4bf);">
+        <div class="error-illustration">
+            <div class="circle-bg"></div>
+            <div class="error-icon-svg">⏳</div>
+            <div class="particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+        </div>
+        <div class="error-code">۵۰۳</div>
+        <h2 class="error-title">سرور یه چرت کوتاه می‌زنه!</h2>
+        <p class="error-description">
+            سرویس ما در حال بروزرسانی یا نگهداریه. به زودی با کلی انرژی برمی‌گردیم!
+            تا چند دقیقه دیگه دوباره امتحان کن. ما داریم همه چیز رو بهتر می‌کنیم! 💪
+        </p>
+        <div class="error-actions">
+            <a href="/" class="error-btn error-btn-primary"><i class="fas fa-home"></i> بازگشت به خانه</a>
+            <button onclick="location.reload()" class="error-btn error-btn-outline"><i class="fas fa-redo-alt"></i> تلاش دوباره</button>
+        </div>
+    </div>
+</div>

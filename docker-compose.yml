@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: supportunit-db
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P ${SA_PASSWORD} -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 40s
+
+  app:
+    build:
+      context: .
+      dockerfile: SupportPulse.App/Dockerfile
+    container_name: supportunit-app
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__Development=Server=sqlserver,1433;Database=SupportUnit_DB;User=sa;Password=${SA_PASSWORD};TrustServerCertificate=true
+    ports:
+      - "5000:8080"
+    volumes:
+      - app-uploads:/app/UploadedFiles
+    restart: unless-stopped
+
+volumes:
+  sqldata:
+  app-uploads:

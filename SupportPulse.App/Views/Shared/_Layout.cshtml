@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl" data-theme="dark">
+<head>
+    <partial name="Partials/Layout/_MeatTagsPartial" />
+    <title>@(ViewData["Title"] == null ? "SupportPulse" : $"SupportPulse - {ViewData["Title"]}")</title>
+    <partial name="Partials/Layout/_StylesLinkPartial" />
+    @await RenderSectionAsync("Css", required: false)
+</head>
+<body>
+    <!-- Toast Messages -->
+    <div id="toastContainer" class="toast-container"></div>
+    <!-- MovingItems -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Header -->
+    <partial name="Partials/Layout/_HeaderPartial" />
+
+    @RenderBody()
+
+    <!-- footer -->
+    <partial name="Partials/Layout/_FooterPartial" />
+
+    @await RenderSectionAsync("AfterFooterBeforeScripts", required: false)
+
+    <!-- scripts -->
+    <partial name="Partials/Layout/_ScriptsPartial" />
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

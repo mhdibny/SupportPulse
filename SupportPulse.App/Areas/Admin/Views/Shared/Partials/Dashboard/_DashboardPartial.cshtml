@@ -1,0 +1,34 @@
+﻿@* Admin dashboard partial view with navigation cards *@
+<div class="animate-fade-in-up">
+    <div class="welcome-section mb-4 text-center">
+        <h3 class="fw-bold">خوش آمدید به مدیریت <span style="background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">واحد پشتیبانی</span></h3>
+        <p class="text-secondary">مدیریت کاربران، نقش‌ها، چت‌ها و نظارت بر سیستم</p>
+    </div>
+    <div class="admin-cards-grid">
+        <div class="admin-card" data-page="roles">
+            <div class="admin-card-icon"><i class="fas fa-user-shield"></i></div>
+            <h3>نقش‌ها</h3>
+            <p>مدیریت نقش‌ها و مجوزها</p>
+        </div>
+        <div class="admin-card" data-page="users">
+            <div class="admin-card-icon"><i class="fas fa-users"></i></div>
+            <h3>کاربران</h3>
+            <p>مشاهده و مدیریت کاربران</p>
+        </div>
+        <div class="admin-card" data-page="categories">
+            <div class="admin-card-icon"><i class="fas fa-headset"></i></div>
+            <h3>واحدهای پشتیبانی</h3>
+            <p>مدیریت دسته‌بندی‌ها</p>
+        </div>
+        <div class="admin-card" data-page="chat">
+            <div class="admin-card-icon"><i class="fas fa-comments"></i></div>
+            <h3>چت‌ها</h3>
+            <p>گفتگوهای کاربران</p>
+        </div>
+        <div class="admin-card" data-page="settings">
+            <div class="admin-card-icon"><i class="fas fa-cog"></i></div>
+            <h3>تنظیمات</h3>
+            <p>تنظیمات پنل</p>
+        </div>
+    </div>
+</div>

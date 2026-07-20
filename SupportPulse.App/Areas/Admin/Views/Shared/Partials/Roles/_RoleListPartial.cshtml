@@ -1,0 +1,70 @@
+﻿@* Role list partial with search, filter modal, and glass table *@
+<div class="glass-card animate-fade-in-up" style="min-height: calc(100vh - 90px);">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h4 class="mb-0">لیست نقش‌ها</h4>
+        <button class="btn btn-primary btn-sm" id="addRoleBtn">
+            <i class="fas fa-plus"></i> افزودن نقش
+        </button>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center mb-3 flex-wrap">
+        <div class="position-relative flex-grow-1" style="max-width:350px;">
+            <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
+            <input type="text" id="roleSearchInput" class="form-control ps-5 pe-5" placeholder="جستجوی نام نقش..." autocomplete="off">
+            <button class="btn-clear-search position-absolute top-50 end-0 translate-middle-y me-2 d-none" id="clearSearchBtn" title="پاک کردن">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <button class="btn btn-outline-light btn-sm" id="roleFilterBtn" title="فیلتر بر اساس مجوز">
+            <span>فیلتر</span>
+            <i class="fas fa-filter"></i>
+        </button>
+        <button class="btn btn-outline-light btn-sm d-none" id="clearFilterBtn" title="حذف فیلترها">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="glass-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>نام نقش</th>
+                    <th>مجوزها</th>
+                    <th>کاربران</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody id="rolesTableBody">
+                <tr><td colspan="5" class="text-center">در حال بارگذاری...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade glass-modal" id="permissionFilterModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">فیلتر بر اساس مجوزها</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="filterModalSpinner" class="text-center py-4 d-none">
+                    <div class="spinner-border text-primary"></div>
+                </div>
+                <div id="filterPermissionCheckboxes" class="filter-modal-content d-none">
+                    @* Populated by JavaScript *@
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-light" id="resetPermissionFilterBtn">
+                    <i class="fas fa-undo-alt"></i> حذف انتخاب‌ها
+                </button>
+                <button type="button" class="btn btn-primary" id="applyPermissionFilterBtn">
+                    <i class="fas fa-check"></i> اعمال فیلتر
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,296 @@
+﻿@using SupportPulse.Core.Utilities.ClaimsPrincipals
+@using SupportPulse.Core.Utilities.Converters
+@model SupportPulse.Core.ViewModels.Pages.Home.HomeVM
+@{
+    ViewData["Title"] = "صفحه اصلی";
+    string userName = User.GetUserName();
+    var activeChat = Model.UserChats?.FirstOrDefault();
+}
+
+<div id="notificationContainer" class="notification-container"></div>
+
+<main class="main-content">
+    <div class="container-fluid px-lg-4">
+        <div class="chat-container">
+
+            @* Right column: chat list *@
+            <div class="chat-sidebar">
+                <div class="chat-sidebar-header">
+                    <h3 class="sidebar-title">گفتگوها</h3>
+                    <button class="btn-new-chat" data-bs-toggle="modal" data-bs-target="#newChatModal">
+                        <i class="fas fa-plus"></i>
+                        <span>چت جدید</span>
+                    </button>
+                </div>
+                <div class="chat-list" id="chatList">
+                    @if (Model?.UserChats?.Any() == true)
+                    {
+                        @foreach (var chat in Model.UserChats)
+                        {
+                            <div class="chat-item @(activeChat != null && chat.UniqChatId == activeChat.UniqChatId ? "active" : "")"
+                                 data-chat-uniq-id="@chat.UniqChatId">
+                                <div class="chat-avatar">
+                                    <i class="@chat.SupportCategoryIconClass"></i>
+                                </div>
+                                <div class="chat-item-details">
+                                    <div class="chat-title">@chat.Subject</div>
+                                    <div class="chat-last-message">@chat.LatestMessageText</div>
+                                    <div class="chat-item-status">
+                                        <span class="status-dot @(chat.ChatStatus == "گفتگو تکمیل شد." ? "completed" : "responding")"></span>
+                                        <span>@chat.ChatStatus</span>
+                                    </div>
+                                </div>
+                                <div class="chat-meta">
+                                    <span class="chat-time">@(chat.LatestMessageTime?.ToString(@"hh\:mm") ?? "")</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="no-chat-message">
+                            <div class="no-chat-icon">
+                                <i class="fas fa-comment-slash"></i>
+                            </div>
+                            <h4>هنوز گفتگویی ندارید</h4>
+                            <p>شما می‌توانید با کلیک روی دکمه «چت جدید» اولین گفتگوی خود را با واحد پشتیبانی آغاز کنید.</p>
+                            <small>پس از ایجاد چت، لیست گفتگوهای شما در این بخش نمایش داده می‌شود.</small>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @* Left column: chat window *@
+            <div class="chat-main">
+                <div class="chat-header">
+                    <div class="chat-header-top">
+                        <div class="chat-subject-title" id="activeChatName">
+                            @(activeChat?.Subject ?? "انتخاب گفتگو")
+                        </div>
+                        <div class="chat-header-actions">
+                            @if (activeChat?.ChatStatus != "گفتگو تکمیل شد.")
+                            {
+                                <button class="btn-end-chat" id="endChatBtn">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>پایان گفتگو</span>
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    <div class="chat-header-details-row">
+                        @if (activeChat != null)
+                        {
+                            <span class="chat-unit-name" id="activeChatUnit">
+                                <i class="fas fa-building"></i>
+                                <span>@activeChat.SupportCategoryName</span>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="chat-unit-name" id="activeChatUnit" style="display: none;"></span>
+                        }
+                        <span class="chat-status-badge @(activeChat?.ChatStatus == "گفتگو تکمیل شد." ? "completed" : "responding")"
+                              id="activeChatStatusBadge">
+                            @(activeChat?.ChatStatus ?? "")
+                        </span>
+                        <span class="chat-date" id="activeChatDate">
+                            @if (activeChat != null)
+                            {
+                                @($"ایجاد: {activeChat.CreatedTime.ToShamsi()}")
+                            }
+                        </span>
+                        <span id="adminPresenceIndicator" class="presence offline" title="آفلاین"></span>
+                        <div id="userTypingIndicator" class="typing-indicator">
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    @if (activeChat != null && Model.LatestChatMessages?.Any() == true)
+                    {
+                        var hasUserMessage = Model.LatestChatMessages.Any(m => m.SenderUserName == userName);
+                        <div class="chat-welcome-guide" id="chatWelcomeGuide" style="display: @(hasUserMessage ? "none" : "flex");">
+                            <div class="guide-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="guide-title">به گفتگو خوش آمدید</h4>
+                            <p class="guide-text">
+                                شما هنوز پیامی ارسال نکرده‌اید. می‌توانید مشکلات خود را بیان کنید و
+                                پشتیبانی فنی به‌صورت <strong>بلادرنگ</strong> پاسخ خواهد داد.
+                            </p>
+                            <div class="guide-features">
+                                <span><i class="fas fa-paperclip"></i> ارسال فایل</span>
+                                <span><i class="fas fa-clock"></i> پاسخگویی سریع</span>
+                            </div>
+                            <p class="guide-hint">
+                                برای شروع، پیام خود را در کادر پایین بنویسید و ارسال کنید.
+                            </p>
+                        </div>
+                        @foreach (var msg in Model.LatestChatMessages)
+                        {
+                            var isIncoming = msg.SenderUserName != userName;
+                            <div class="message @(isIncoming ? "incoming" : "outgoing")">
+                                <div class="message-bubble">
+                                    @if (msg.Data != null)
+                                    {
+                                        <div>@msg.Data</div>
+                                    }
+                                    @if (msg.AttachFiles?.Any() == true)
+                                    {
+                                        <div class="message-files">
+                                            @foreach (var attachFile in msg.AttachFiles)
+                                            {
+                                                var isImage = System.Text.RegularExpressions.Regex.IsMatch(
+                                                    attachFile.DownloadName ?? "",
+                                                    @"\.(jpg|jpeg|png|gif|bmp|webp)$",
+                                                    System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                                                if (isImage)
+                                                {
+                                                    <div class="file-attachment image-attachment"
+                                                         data-download="@attachFile.DownloadName"
+                                                         data-original="@attachFile.OriginalName">
+                                                        <div class="image-preview-thumb">
+                                                            <img src="/download/@attachFile.DownloadName?originalName=@attachFile.OriginalName"
+                                                                 alt="@attachFile.OriginalName"
+                                                                 loading="lazy" />
+                                                        </div>
+                                                        <span>@attachFile.OriginalName</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="file-attachment"
+                                                         data-download="@attachFile.DownloadName"
+                                                         data-original="@attachFile.OriginalName">
+                                                        <i class="fas fa-file"></i>
+                                                        <span>@attachFile.OriginalName</span>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                    <div class="message-meta">
+                                        @if (isIncoming)
+                                        {
+                                            <span class="message-sender">@msg.SenderName</span>
+                                        }
+                                        <span class="message-time">@msg.Time</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="chat-welcome-guide" id="chatWelcomeGuide">
+                            <div class="guide-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="guide-title">به گفتگو خوش آمدید</h4>
+                            <p class="guide-text">
+                                شما هنوز پیامی ارسال نکرده‌اید. می‌توانید مشکلات خود را بیان کنید و
+                                پشتیبانی فنی به‌صورت <strong>بلادرنگ</strong> پاسخ خواهد داد.
+                            </p>
+                            <div class="guide-features">
+                                <span><i class="fas fa-paperclip"></i> ارسال فایل</span>
+                                <span><i class="fas fa-clock"></i> پاسخگویی سریع</span>
+                            </div>
+                            <p class="guide-hint">
+                                برای شروع، پیام خود را در کادر پایین بنویسید و ارسال کنید.
+                            </p>
+                        </div>
+                    }
+                </div>
+
+                <div class="chat-footer">
+                    <form id="messageForm" class="message-form">
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="fileInput" style="display: none;" multiple>
+                            <button type="button" class="btn-attach" id="attachBtn">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="message-input" id="messageInput"
+                               placeholder="پیام خود را بنویسید..." autocomplete="off"
+                        @(activeChat?.ChatStatus == "گفتگو تکمیل شد." ? "disabled" : "")>
+                        <button type="submit" class="btn-send"
+                            @(activeChat?.ChatStatus == "گفتگو تکمیل شد." ? "disabled" : "")>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="file-preview" id="filePreview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@* New chat modal *@
+<div class="modal fade" id="newChatModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">ایجاد گفتگوی جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newChatForm">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold mb-3">واحد مربوطه را انتخاب کنید</label>
+                        @if (Model?.SupportCategories?.Any() == true)
+                        {
+                            <div class="unit-radio-group">
+                                @foreach (var category in Model.SupportCategories)
+                                {
+                                    <label class="unit-radio-card">
+                                        <input type="radio" name="chatUnit" value="@category.Id">
+                                        <span class="radio-card-content">
+                                            <i class="@category.IconClass"></i>
+                                            <span>@category.Name</span>
+                                            @if (!string.IsNullOrWhiteSpace(category.Details))
+                                            {
+                                                <small class="unit-description">@category.Details</small>
+                                            }
+                                        </span>
+                                    </label>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="no-support-message">
+                                <div class="no-support-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <h4>واحد پشتیبانی در دسترس نیست</h4>
+                                <p>در حال حاضر هیچ واحدی برای ارائه خدمات فعال نمی‌باشد. لطفاً بعداً مجدد تلاش فرمایید یا با مدیر سیستم تماس بگیرید.</p>
+                                <small>سیستم ممکن است در حال بروزرسانی باشد.</small>
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">نام گفتگو</label>
+                        <input type="text" class="form-control" id="chatName" placeholder="مثلاً: مشکل پرینتر" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary" id="createChatBtn">ایجاد</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/Site/chat.js"></script>
+    <script>
+        window.initialActiveChatId = "@(activeChat?.UniqChatId)";
+        window.currentUserName = "@userName";
+    </script>
+}

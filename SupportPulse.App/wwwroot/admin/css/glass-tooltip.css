@@ -1,0 +1,41 @@
+﻿/* ========== Glass Tooltip ========== */
+.glass-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    white-space: nowrap;
+    box-shadow: var(--card-shadow);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 2500;
+}
+
+    .glass-tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        right: 50%;
+        transform: translateX(50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: var(--border) transparent transparent transparent;
+    }
+
+.has-glass-tooltip {
+    position: relative;
+    cursor: default;
+}
+
+    .has-glass-tooltip:hover .glass-tooltip {
+        opacity: 1;
+    }

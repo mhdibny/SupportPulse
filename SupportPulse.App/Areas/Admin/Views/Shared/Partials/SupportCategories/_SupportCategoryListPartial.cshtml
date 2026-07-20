@@ -1,0 +1,31 @@
+﻿@* Support category list partial with local search and glass table *@
+<div class="glass-card animate-fade-in-up">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h4 class="mb-0">لیست واحدهای پشتیبانی</h4>
+        <button class="btn btn-primary btn-sm" id="addSupportCategoryBtn">
+            <i class="fas fa-plus"></i> افزودن واحد جدید
+        </button>
+    </div>
+
+    <div class="position-relative mb-3" style="max-width:350px;">
+        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
+        <input type="text" id="supportCategorySearchInput" class="form-control ps-5" placeholder="جستجوی نام واحد..." autocomplete="off">
+    </div>
+
+    <div class="table-responsive">
+        <table class="glass-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>نام واحد</th>
+                <th>وضعیت</th>
+                <th>تعداد کاربران</th>
+                <th>عملیات</th>
+            </tr>
+            </thead>
+            <tbody id="supportCategoriesTableBody">
+            <tr><td colspan="5" class="text-center">در حال بارگذاری...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,162 @@
+﻿@model SupportPulse.Core.ViewModels.User.SignUpUserVM
+@{
+    ViewData["Title"] = "ایجاد حساب کاربری";
+}
+@section Css
+{
+    <link rel="stylesheet" href="~/css/style/register.css" />
+}
+
+<main class="main-content">
+    <div class="container">
+        <div class="row pt-4 pt-lg-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="hero-section">
+                    <span class="badge">✨ به جمع ما بپیوندید</span>
+                    <h1 class="hero-title">ارتباط سریع با <span class="text-gradient">واحد فنی</span></h1>
+                    <p class="hero-description">پلتفرم چت سازمانی با قابلیت ارسال فایل، نوتیفیکیشن لحظه‌ای و امنیت بالا. همین حالا حساب کاربری خود را بسازید.</p>
+                    <div class="hero-features">
+                        <div class="feature-item"><i class="fas fa-shield-alt"></i><span>امنیت پیشرفته</span></div>
+                        <div class="feature-item"><i class="fas fa-cloud-upload-alt"></i><span>ارسال فایل</span></div>
+                        <div class="feature-item"><i class="fas fa-bolt"></i><span>سرعت بالا</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 offset-lg-1">
+                <div class="register-card" id="registerCard">
+                    <div class="card-header">
+                        <h2 class="card-title">ایجاد حساب</h2>
+                        <p class="card-subtitle">اطلاعات خود را وارد کنید</p>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="SignUp" asp-controller="Identity" method="post" id="registerForm" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="input-wrapper">
+                                        <input asp-for="FirstName" class="form-input" placeholder=" " required>
+                                        <label asp-for="FirstName"></label>
+                                        <i class="fas fa-user input-icon"></i>
+                                        <span asp-validation-for="FirstName" class="field-validation-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-wrapper">
+                                        <input asp-for="LastName" class="form-input" placeholder=" " required>
+                                        <label asp-for="LastName"></label>
+                                        <i class="fas fa-user input-icon"></i>
+                                        <span asp-validation-for="LastName" class="field-validation-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input asp-for="UserName" class="form-input" placeholder=" " required>
+                                <label asp-for="UserName"></label>
+                                <i class="fas fa-at input-icon"></i>
+                                <span asp-validation-for="UserName" class="field-validation-error"></span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input asp-for="Password" class="form-input" placeholder=" " required type="password">
+                                <label asp-for="Password"></label>
+                                <i class="fas fa-lock input-icon"></i>
+                                <button type="button" class="password-toggle" tabindex="-1"><i class="far fa-eye"></i></button>
+                                <span asp-validation-for="Password" class="field-validation-error"></span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input asp-for="RePassword" class="form-input" placeholder=" " required type="password">
+                                <label asp-for="RePassword"></label>
+                                <i class="fas fa-lock input-icon"></i>
+                                <span asp-validation-for="RePassword" class="field-validation-error"></span>
+                            </div>
+                            <div class="terms-wrapper">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-label"><a href="#" class="terms-link">شرایط استفاده</a> را می‌پذیرم</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-submit" id="submitBtn">
+                                <span class="btn-content"><span>ثبت‌نام</span><i class="fas fa-arrow-left"></i></span>
+                                <div class="particle-ring">
+                                    <span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span>
+                                </div>
+                            </button>
+                        </form>
+                        <div class="login-link">قبلاً حساب دارید؟ <a asp-action="Login" asp-controller="Identity">وارد شوید</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="platform-features-section" id="platformFeatures">
+            <div class="section-header"><h2 class="section-title">چرا <span class="text-gradient">تک‌چت</span>؟</h2><p class="section-subtitle">تمام ابزارهایی که برای ارتباط سریع و مؤثر نیاز دارید</p></div>
+            <div class="features-grid">
+                <div class="feature-card" data-delay="0">
+                    <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                    <h3>چت بلادرنگ</h3>
+                    <p>ارسال و دریافت پیام‌ها به‌صورت آنی با WebSocket و SignalR، بدون تأخیر.</p>
+                </div>
+                <div class="feature-card" data-delay="100">
+                    <div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>ارسال فایل</h3>
+                    <p>اشتراک‌گذاری اسناد، تصاویر و فایل‌ها با قابلیت پیش‌نمایش و دانلود.</p>
+                </div>
+                <div class="feature-card" data-delay="200">
+                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <h3>نوتیفیکیشن هوشمند</h3>
+                    <p>اعلان‌های داخلی و مرورگر برای پیام‌های جدید حتی در پس‌زمینه.</p>
+                </div>
+                <div class="feature-card" data-delay="300">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>امنیت بالا</h3>
+                    <p>رمزنگاری سرتاسری و احراز هویت دو مرحله‌ای برای محافظت از داده‌ها.</p>
+                </div>
+                <div class="feature-card" data-delay="400">
+                    <div class="feature-icon"><i class="fas fa-history"></i></div>
+                    <h3>تاریخچه گفتگوها</h3>
+                    <p>دسترسی به تمام مکالمات گذشته با قابلیت جستجو و فیلتر.</p>
+                </div>
+                <div class="feature-card" data-delay="500">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>چت گروهی</h3>
+                    <p>ایجاد گروه‌های کاری و ارتباط همزمان با چندین همکار.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="~/js/Identity/identity.js"></script>
+    <partial name="Partials/Validation/_ValidationScriptsPartial" />
+    <partial name="Partials/Alert/_AlertPartial" model="Model" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const featureCards = document.querySelectorAll('.feature-card');
+
+        if (featureCards.length > 0) {
+        featureCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        card.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        });
+
+        const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        const card = entry.target;
+        const delay = parseInt(card.getAttribute('data-delay')) || 0;
+        setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        }, delay);
+        cardObserver.unobserve(card);
+        }
+        });
+        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+        featureCards.forEach(card => cardObserver.observe(card));
+        }
+        });
+    </script>
+}

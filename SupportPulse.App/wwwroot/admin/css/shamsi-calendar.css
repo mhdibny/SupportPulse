@@ -1,0 +1,166 @@
+﻿/* ---------- Shamsi Calendar Component ---------- */
+.calendar-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.calendar-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1100;
+    margin-top: 8px;
+    background: var(--surface);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 1.2rem;
+    color: var(--text);
+    font-family: 'IRANSansWeb', Tahoma, sans-serif;
+    direction: rtl;
+    width: 320px;
+    display: none;
+    user-select: none;
+}
+
+    .calendar-popup.open {
+        display: block;
+    }
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.calendar-month-year {
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.calendar-nav-btn {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+    .calendar-nav-btn:hover {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(79,207,229,0.3);
+    }
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    text-align: center;
+}
+
+.calendar-day-name {
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.4rem 0;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+
+    .calendar-day-name:nth-child(6) {
+        color: #ef4444;
+    }
+
+.calendar-day {
+    padding: 0.5rem 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    font-weight: 500;
+    font-size: 0.9rem;
+    position: relative;
+    background: transparent;
+}
+
+    .calendar-day:hover {
+        background: var(--sidebar-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .calendar-day.today {
+        border: 2px solid var(--color-accent);
+        background: rgba(79,207,229,0.1);
+        font-weight: 700;
+    }
+
+    .calendar-day.selected {
+        background: var(--gradient-primary);
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 6px 16px rgba(79,207,229,0.35);
+        transform: scale(1.05);
+    }
+
+    .calendar-day.other-month {
+        opacity: 0.25;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .calendar-day.weekend {
+        color: #ef4444;
+    }
+
+.calendar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+}
+
+.calendar-today-btn {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+    .calendar-today-btn:hover {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(79,207,229,0.3);
+    }
+
+.calendar-selected-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}

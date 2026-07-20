@@ -1,0 +1,29 @@
+﻿@* 403 Forbidden *@
+@{
+    ViewData["Title"] = "دسترسی غیرمجاز";
+}
+<div class="error-glass-wrapper">
+    <div class="error-glass-card" style="--er-primary: #fb923c; --er-gradient: linear-gradient(135deg, #fb923c, #ef4444);">
+        <div class="error-illustration">
+            <div class="circle-bg"></div>
+            <div class="error-icon-svg">🚧</div>
+            <div class="particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+        </div>
+        <div class="error-code">۴۰۳</div>
+        <h2 class="error-title">وای! اینجا منطقه ممنوعه!</h2>
+        <p class="error-description">
+            به نظر می‌رسه شما مجوز ورود به این بخش رو نداری. مثل این می‌مونه که بخوای بدون بلیط وارد سینما بشی!
+            اگر فکر می‌کنی اشتباه شده، با پشتیبانی تماس بگیر.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="error-btn error-btn-primary"><i class="fas fa-home"></i> بازگشت به خانه</a>
+            <a href="/login" class="error-btn error-btn-outline"><i class="fas fa-sign-in-alt"></i> ورود به حساب</a>
+        </div>
+    </div>
+</div>

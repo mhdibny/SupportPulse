@@ -1,0 +1,19 @@
+﻿@* Display a toast notification when the model carries an alert *@
+@model SupportPulse.Core.DTOs.Common.WithAlertViewModel
+@if (Model?.Alert is not null)
+{
+    <script>
+        (function() {
+            var message = @Html.Raw(Json.Serialize(Model.Alert.Message));
+            var title = @Html.Raw(Json.Serialize(Model.Alert.MessageTitle));
+            var type = @Html.Raw(Json.Serialize(Model.Alert.MessageType));
+            if (typeof window.showToast === 'function') {
+                window.showToast(message, type, title);
+            } else {
+                // Fallback when the toast function is missing
+                console.warn('showToast not found, using alert: ' + message);
+                alert((title ? title + ': ' : '') + message);
+            }
+        })();
+    </script>
+}

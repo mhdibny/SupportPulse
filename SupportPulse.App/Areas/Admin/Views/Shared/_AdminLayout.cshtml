@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <partial name="Partials/Layout/_MeatTagsPartial" />
+
+    <title>@ViewData["Title"] - پنل مدیریت SupportPulse</title>
+
+    <partial name="Partials/Layout/_StylesLinkPartial" />
+    @await RenderSectionAsync("Css", required: false)
+</head>
+<body>
+    @* Toast notifications container *@
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div class="admin-layout">
+        <partial name="Partials/Layout/_SidebarPartial" />
+
+        <div class="admin-main">
+            <partial name="Partials/Layout/_TopbarPartial" />
+
+            <main id="mainContent" class="admin-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <button id="backToTop" class="back-to-top" title="بازگشت به بالا">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <partial name="Partials/Layout/_BanSlideoverPartial" />
+
+    <partial name="Partials/Layout/_ScriptsPartial" />
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
