@@ -155,7 +155,7 @@ docker-compose up -d
 The app is available at:
 - Customer panel: `http://localhost:5000`
 - Admin panel: `http://localhost:5000/Admin`
-- Default admin: `manager` (password is pre‑seeded; check the docs for details)
+- Default admin login: both the username and password are `manager`
 
 > 💡 **Straightforward testing**: To test on a clean address like `http://localhost` (port 80), edit the port mapping in `docker-compose.yml` from `"5000:5000"` to `"80:5000"` before running `docker-compose up`.
 
