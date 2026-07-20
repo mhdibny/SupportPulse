@@ -1,0 +1,3 @@
+# Force GitHub to recognize C# as the primary language
+*.js linguist-vendored
+*.cs linguist-detectable=true
