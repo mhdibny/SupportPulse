@@ -240,8 +240,6 @@ namespace SupportPulse.Core.Services.Messages
         /// <inheritdoc />
         public async Task<int?> MarkMessagesAsSeenAsync(string chatUniqId, int userId)
         {
-            //todo: check at asap
-            // ── 1. Fast lookup of essential chat information ──
             var chatInfo = await _db.Chats
                 .AsNoTracking()
                 .Where(c => c.ChatUniqId == chatUniqId)
