@@ -3,7 +3,7 @@ version: '3.8'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: supportunit-db
+    container_name: supportpulse-db
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
       ACCEPT_EULA: "Y"
@@ -23,13 +23,13 @@ services:
     build:
       context: .
       dockerfile: SupportPulse.App/Dockerfile
-    container_name: supportunit-app
+    container_name: supportpulse-app
     depends_on:
       sqlserver:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
-      - ConnectionStrings__Development=Server=sqlserver,1433;Database=SupportUnit_DB;User=sa;Password=${SA_PASSWORD};TrustServerCertificate=true
+      - ConnectionStrings__Development=Server=sqlserver,1433;Database=SupportPulse_DB;User=sa;Password=${SA_PASSWORD};TrustServerCertificate=true
     ports:
       - "5000:8080"
     volumes:
